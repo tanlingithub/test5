@@ -1,27 +1,58 @@
 <template>
   <div>
-    <config-table
-      name="基础表格"
-      :visible="false"
-      :pagination="configTablePagination"
-      :is-operation="false"
-      operation-name="操作"
-      :table-data="configTableTabledata"
-      :table-data-static="configTableTabledatastatic"
-      :table-config="configTableTableconfig"
-      :parameter-list="configTableParameterlist"
-      url="/deepexi-domain-member/domain/sdk/expirePoints"
-      table-data-handler="function handleData(response) {
-  return {
-    // 重要：！！返回表格数据
-    tableData: response.data
-  };
-}"
-      app-key="URRHSIJj"
-      app-secret="12bd50ab90ed999610a16e338820ff35183c8771"
-      method="POST"
+    <form-container
+      :inline="false"
+      position="left"
+      primary-text="搜索"
+      :have-second="true"
+      second-text="重置"
       v-roles="''"
-    ></config-table>
+    >
+      <form-input
+        :in-container="true"
+        type="text"
+        placeholder="请输入"
+        label="单行文本"
+        :is-label-visible="true"
+        :status="0"
+        :min="2"
+        :max="30"
+        :require="false"
+        :is-show-min="false"
+        :is-show-max="false"
+        :is-show-customer="false"
+        :rules="formInputRules"
+        v-roles="''"
+      ></form-input>
+      <form-input
+        :in-container="true"
+        type="number"
+        placeholder="请输入"
+        label="数字框"
+        :is-label-visible="true"
+        :status="0"
+        :step="1"
+        :min="2"
+        :max="30"
+        :require="false"
+        :is-show-min="false"
+        :is-show-max="false"
+        :is-show-customer="false"
+        :rules="formInputRules_1"
+        v-roles="''"
+      ></form-input>
+      <submit-item
+        :inline="false"
+        position="left"
+        primary-text="搜索"
+        :have-second="true"
+        second-text="重置"
+        :query="submitItemQuery"
+        :body="submitItemBody"
+        :headers="submitItemHeaders"
+        v-roles="''"
+      ></submit-item>
+    </form-container>
   </div>
 </template>
 <script>
@@ -30,28 +61,23 @@ export default {
   data: function() {
     return {
       pageName: "首页",
-      configTablePagination: [10],
-      configTableTabledata: [{}],
-      configTableTabledatastatic: [],
-      configTableTableconfig: [
+      formInputRules: [
         {
-          label: "序号",
-          name: "index"
-        },
-        {
-          label: "创建时间",
-          name: "creatAt"
-        },
-        {
-          label: "修改时间",
-          name: "updateAt"
-        },
-        {
-          label: "创建人",
-          name: "createBy"
+          required: false,
+          message: "",
+          trigger: []
         }
       ],
-      configTableParameterlist: []
+      formInputRules_1: [
+        {
+          required: false,
+          message: "",
+          trigger: []
+        }
+      ],
+      submitItemQuery: {},
+      submitItemBody: {},
+      submitItemHeaders: {}
     }
   },
   mounted: function() {},
